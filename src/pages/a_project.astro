@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Sidebar from '../components/Sidebar.astro';
+import { ViewTransitions } from "astro:transitions";
+const anim = {
+	old: {
+	  name: 'test',
+	  duration: '0.2s',
+	  easing: 'linear',
+	  fillMode: 'forwards',
+	},
+	new: {
+	  name: 'test-reversed',
+	  duration: '0.3s',
+	  easing: 'linear',
+	  fillMode: 'backwards',
+	}
+  };
+  
+  const myFade = {
+	forwards: anim,
+	backwards: anim,
+  };
+---
+
+<Layout title = "Project Name">
+	<Sidebar selected = "project"></Sidebar>
+	<div class = "main-content pageTransitionIn "transition:animate={myFade}>
+
+    </div>
+</Layout>

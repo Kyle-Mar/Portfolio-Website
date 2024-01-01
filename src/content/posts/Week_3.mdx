@@ -1,0 +1,22 @@
+﻿---
+title: "Gnomad: Starting the Inventory System"
+description: "The goal this week was to begin work on the player inventory. 
+Our inventory is going to be a tetris-style spatial inventory where the player must fit each item they want to equip into the grid space provided. I started by making a custom Grid class because there were a number of things that I would have needed to add to Unity's built in Grid class, that would have been considerably more difficult given the amount of flexibility needed in accessing each cell."
+date: "Sep 29 2023"
+---
+import ExternalLink from '../../components/ExternalLink.astro';
+
+The goal this week was to begin work on the player inventory. Our inventory is going to be a tetris-style spatial inventory where the player must fit each item they want to equip into the grid space provided. 
+
+I started by making a custom Grid class because there were a number of things that I would have needed to add to Unity's built in Grid class, that would have been considerably more difficult given the amount of flexibility needed in accessing each cell.
+
+Our grid class supports placing grid-items on top of the grid meanwhile checking to see if they extend past the bounds of the grid and if another grid-item's cell already occupies the space one of the new item's cell would be. If one of these conditions fails the grid will reject the placement. If these conditions pass, the item's id is stored into the positions where the item's cells are. It then stores the Item in a dictionary as the key and a Vector2Int as the value.
+
+It also supports reversing the columns and transposing the grid, which when combined in that order provides a grid where the grid is <ExternalLink href = "https://blogs.sas.com/content/iml/2013/10/18/rotating-matrices.html" text = "rotated 90 degrees clockwise."></ExternalLink>
+
+Later in the week, I made an editor tool to easily create items and set the relevant data for them. In the process of making this tool, I discovered the fact that Unity does not serialize multi-dimensional arrays natively. 
+
+This meant that I had to flatten the array, overload the index operator for the Grid class, and finally creating a custom Inspector for the Item class which has a Grid.
+
+Finally, the item ids are now assigned to a unique value when a new Item Scriptable Object asset is created.
+

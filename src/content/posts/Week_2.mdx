@@ -1,0 +1,33 @@
+﻿---
+title: "Gnomad: Framerate Independent Interpolation"
+description: "The goal this week was to continue implementing new movement mechanics and fixing several bugs thereof. After the implementation of the HSM, it was much easier to implement the ground pound, slide, wall slide, and wall jump mechanics than it would have been without. One particularly interesting bug that we came across with our falling state..."
+date: "Sep 22 2023"
+---
+
+import ExternalLink from '../../components/ExternalLink.astro'
+
+The goal this week was to continue implementing new movement mechanics and fixing several bugs thereof. After the implementation of the HSM, it was much easier to implement the ground pound, slide, wall slide, and wall jump mechanics than it would have been without. 
+
+One particularly interesting bug that we came across with our falling state was that it was considerably different in a build than it was in the editor. As it turns out, the suspect line was the following:
+
+```csharp
+context.rb.velocity = Vector2.Lerp(
+    context.rb.velocity,
+    new Vector2(context.rb.velocity.x, MovementStats.fallSpeed),
+    0.1f);
+```
+
+
+
+Thankfully, I found a relevant <ExternalLink href = "https://www.youtube.com/watch?v=YJB1QnEmlTs&t=418s" text = "video by Simon Dev"></ExternalLink> that covered exactly what we were experiencing, and also pointed us away from using simply delta-time as the interpolant. Using this advice, I implemented a utility function for this purpose shown below:
+
+```csharp
+public static class Utils
+{
+    public static float GetInterpolant(float k){
+    return Mathf.Abs(1.0f -
+        Mathf.Pow(k, Time.deltaTime));
+    }
+}
+```
+

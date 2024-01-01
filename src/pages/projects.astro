@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Sidebar from '../components/Sidebar.astro';
+import { ViewTransitions } from "astro:transitions";
+import Project from "../components/Project.astro";
+const anim = {
+	old: {
+	  name: 'test',
+	  duration: '0.2s',
+	  easing: 'cubic-bezier',
+	  fillMode: 'forwards',
+	},
+	new: {
+	  name: 'test-reversed',
+	  duration: '0.3s',
+	  easing: 'cubic-bezier',
+	  fillMode: 'backwards',
+	}
+  };
+  
+  const myFade = {
+	forwards: anim,
+	backwards: anim,
+  };
+---
+
+<Layout title = "Project Name">
+	<Sidebar selected="project"></Sidebar>
+	<div class = "main-content pageTransitionIn "transition:animate={myFade}>
+		<h1 class = "projects-text text-color-light">
+			My Projects
+		</h1>
+		<Project
+			href = "/a_project/"
+			title = "Project Name"
+			body = "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
+		></Project>
+		<Project
+			href = "/a_project/"
+			title = "Project Name"
+			body = "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
+		></Project>
+		<Project
+			href = "/a_project/"
+			title = "Project Name"
+			body = "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
+		></Project>
+    </div>
+</Layout>

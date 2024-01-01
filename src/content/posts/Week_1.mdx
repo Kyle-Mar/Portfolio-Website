@@ -1,0 +1,18 @@
+﻿---
+title: "Gnomad: Player Hierarchical State Machine"
+description: "The goal for this week was to quickly prototype the player movement. This was important so information could be quickly gathered on what worked and what doesn't for making the movement feel quick and snappy.  In addition, the team needed to finish the pre-production phase this milestone so that we knew precisely what our game was going to be, which is why we didn't commit to anything maintainable until we knew exactly what our needs for the Player Controller was going to be..."
+date: "Sep 15 2023"
+---
+The goal for this week was to quickly prototype the player movement. This was important so information could be quickly gathered on what worked and what doesn't for making the movement feel quick and snappy.  In addition, the team needed to finish the pre-production phase this milestone so that we knew precisely what our game was going to be, which is why we didn't commit to anything maintainable until we knew exactly what our needs for the Player Controller was going to be. After that the goal was to re-implement the player movement in a more maintainable manner going forward.
+
+While prototyping, I learned that we would need a lot of creature comforts that one would find in a precision platformer, like coyote time and input buffers. However, as I continued to implement these features while also adding new movement mechanics to the Player Controller, it became pretty clear that I would need a better solution for this after the tail-end of the preproduction phase was complete. 
+
+What I decided to go with is a Hierarchical State Machine. The primary benefit of this approach is that it simplifies the movement mechanics into the following considerations:
+ 
+ - The state the player is in
+ - The child state of each parent state
+ - What should happen while the player is in the state
+ - What should happen as the player leaves the state
+ - What should happen as the player enters the state 
+
+Most importantly though is that when debugging, it becomes much easier to locate where a bug in comparison to the naive approach of using booleans to handle the state of the player all in one monolithic script.

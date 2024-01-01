@@ -1,0 +1,82 @@
+---
+import IndexLayout from '../layouts/IndexLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Project from '../components/Project.astro';
+import Card from '../components/Card.astro';
+import { ViewTransitions} from 'astro:transitions';
+import HeaderLink from '../components/HeaderLink.astro';
+
+function get_style(name:string, selected:string): string{
+    console.log(name, selected);
+    if (name == selected){
+        return "color: #6d2c1f; text-shadow: 0px 3px 0 #e7b7ad;";
+    } else{
+        return "color: var(--text-color-dark); font-size: 3vw white-space: nowrap;";
+    }
+}
+
+const anim = {
+	old: {
+	  name: 'test',
+	  duration: '0.2s',
+	  easing: 'linear',
+	  fillMode: 'forwards',
+	},
+	new: {
+	  name: 'test-reversed',
+	  duration: '0.3s',
+	  easing: 'linear',
+	  fillMode: 'forwards',
+	}
+  };
+  
+  const myFade = {
+	forwards: anim,
+	backwards: anim,
+  };
+  const canonicalURL = new URL(Astro.url);
+  Astro.redirect('projects.html');
+  
+---
+
+<head>
+</head>
+<IndexLayout title="Kyle Maroscher">
+	<div class = "hero" style = "width: 100%; align-items:center;" transition:animate="fade">
+		<div class = "full-headshot headshot-hero">
+			<a href = "index.html" style = "width: 100%; height: 100%; display:block;" >
+				<img src = {"http://"+canonicalURL.host + "/images/headshot-circle.png"} style = "width: 100%; height: 100%; display:block;"/>
+			</a>
+			
+		</div>
+		<h1 class = "hero-profession-text" style = "transform: translate(-20vw, 3vw); font-size: clamp(0px, 4vw, 50px); color: var(--text-color-compliment-alt)">Hey! <span>&#128075;</span> My name is</h1>
+		<div class = "hero-name-text">
+			<b>Kyle Maroscher</b>
+		</div>
+		<div class = "hero-profession-text">
+			<b><span style = "font-size: clamp(0px, 4vw, 50px); color: var(--text-color-compliment-alt)">I am a </span>Gameplay Engineer</b>
+		</div>
+		
+		<div class = "about-me-box">
+			<div>
+				<p class = "about-me-text">
+					<b>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</b>
+				</p>
+			</div>
+			<div class = "about-me-links" style="">
+				
+				<HeaderLink
+					title = "Personal Projects"
+					href = "/projects/"
+					style = {get_style("project", false)}>
+				</HeaderLink>
+				<HeaderLink
+					title = "Devlog"
+					href = "/devlog/"
+					style = {get_style("devlog", false)}>
+				</HeaderLink>	
+			</div>
+		</div>
+	</div>
+
+</IndexLayout>
