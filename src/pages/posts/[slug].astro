@@ -48,14 +48,14 @@ const { Content } = await post.render();
         <div class="blog-header-container">
           <h1 class = "blog-text">{post.data.title}</h1>
           <div style = "display:flex; flex-direction:row; width: 100%;">
-            <a href = {canonicalURL.protocol+"//"+canonicalURL.host+"/devlog/"} style = "flex: 1;">
-              <h2 class = "blog-text">◄ back</h2>
+            <a href = {canonicalURL.protocol+"//"+canonicalURL.host+"/devlog/"} style = "flex: 1; text-decoration: none;">
+              <h2 class = "back-button">◄devlog</h2>
             </a>
-            <h2 class = "blog-text" style = "flex: 1.8;">{post.data.date}</h2>
+            <h2 class = "blog-text" style = "flex: 1.8">{post.data.date}</h2>
 
           </div>
         </div>
-        <div style ="display:flex; align-items: center; flex-direction: column; color: var(--text-color-dark)">
+        <div class = "slug-content-container">
           <Content/>
         </div>
       </div>

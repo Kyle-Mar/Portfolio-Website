@@ -1,0 +1,43 @@
+---
+title: "Gnomad: Room Loading"
+description: "The goal for me this week was to begin implementation of the dynamic room loading system. Given the large scale of the world of Gnomad, we will certainly run into performance issues if we tried to load the entire game world at once."
+date: "Oct 6 2023"
+---
+import ExternalLink from '../../components/ExternalLink.astro';
+
+The goal for me this week was to begin implementation of the dynamic room loading system. Given the large scale of the world of Gnomad, we will certainly run into performance issues if we tried to load the entire game world at once.
+
+To get ahead of the performance issues, Gnomad will be designed with this in mind. Zones will be sequestered into discrete rooms that will be loaded depending on which room the player is in. The system will then also load adjacent rooms. When the player leaves their erstwhile occupied room, the system will unload the no longer adjacent rooms and load in the rooms that are now nearby.
+
+To accomplish this, each scene will contain a GameObject with the following information:
+    - a change stuff
+    - b
+    - c
+    - d
+
+
+
+
+    asdf
+
+
+    asdf
+
+    asdf
+    asdfasdf
+    accomplishasf
+
+    accomplishasfa
+
+    accomplishasfa
+    
+    accomplishasfa
+    
+    accomplishasfa
+    
+    accomplishasfa
+
+
+
+
+
