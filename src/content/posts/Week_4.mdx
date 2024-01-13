@@ -9,35 +9,47 @@ The goal for me this week was to begin implementation of the dynamic room loadin
 
 To get ahead of the performance issues, Gnomad will be designed with this in mind. Zones will be sequestered into discrete rooms that will be loaded depending on which room the player is in. The system will then also load adjacent rooms. When the player leaves their erstwhile occupied room, the system will unload the no longer adjacent rooms and load in the rooms that are now nearby.
 
-To accomplish this, each scene will contain a GameObject with the following information:
-    - a change stuff
-    - b
-    - c
-    - d
+To accomplish this, each scene will contain a GameObject in a ScriptableObject with the following structure:
+```csharp
+public class SceneInfo : ScriptableObject
+{
+    public SceneReference scene;
+    public IDictionary<int, int> IntIntDictionary
+    {
+        get { return DoorConnections; }
+        set { DoorConnections.CopyFrom(value); }
+    }
+    public List<SceneInfo> adjacentScenes;
+    public bool isLoaded { get; set; }
+    public List<GameObject> DoorPositions;
+    public IntIntDictionary DoorConnections = new IntIntDictionary{ { 0,0 } };
+}
+```
 
+There are a number of technical descisions made in the class so allow me to elaborate.
+We decided that it would be best to avoid using strings or integers to refer to the scene. Instead we use <ExternalLink href = "https://github.com/starikcetin/Eflatun.SceneReference" text = "Scene References"></ExternalLink>. These are useful because a Scene asset can be dragged into the inspector and the handy Unity Add-on will handle the renaming process by automatically reassigning the relevant asset information for the Scene.
 
+As for why we're using a seemingly strange class named IntIntDictionary, Unity - rather <ExternalLink href = "https://twitter.com/FreyaHolmer/status/1564002911729901568" text = "infamously"> </ExternalLink> - does not natively support Dictionary serialization. So we opted to go with <ExternalLink href = "https://github.com/azixMcAze/Unity-SerializableDictionary" text = "this solution"></ExternalLink> 
+Each key and value will contain the index of the door in the door positions list in the the current room and adjacent room's door.
 
+That might have been confusing, since I confused myself writing it. Here is a code snippet that demonstrates its purpose:
+```csharp
+Vector3 doorPosition = sceneInfo.DoorPositions[idx];
+// Get the other door's index from the door connections dictionary
+var otherDoorIdx = sceneInfo.DoorConnections[idx];
+/*
+   get the other scene info from the adjacent scenes based on the index that we got.
+   this means that the value position in the adjacent scenes
+   list must match what value we put in the door connections dictionary 
+   other wise it will load the wrong scene.
+*/
+var adjacentScene = sceneInfo.adjacentScenes[idx];
+/* 
+  get the doorposition that we want to connect to in the other scene
+  Same consequence as above. Door position idx must match 
+  adjacent scene idx and doorposition value.
+*/
+var otherDoorPosition = adjacentScene.DoorPositions[otherDoorIdx];
+```
 
-    asdf
-
-
-    asdf
-
-    asdf
-    asdfasdf
-    accomplishasf
-
-    accomplishasfa
-
-    accomplishasfa
-    
-    accomplishasfa
-    
-    accomplishasfa
-    
-    accomplishasfa
-
-
-
-
-
+The rest of the properties are simple enough, isLoaded stores whether the room is currently loaded, adjacentScenes keeps track of the adjacent room scenes, and DoorPositions keeps track of the empty GameObjects that we place in the center of every door entrance.

@@ -25,8 +25,7 @@ Thankfully, I found a relevant <ExternalLink href = "https://www.youtube.com/wat
 public static class Utils
 {
     public static float GetInterpolant(float k){
-    return Mathf.Abs(1.0f -
-        Mathf.Pow(k, Time.deltaTime));
+    return Mathf.Abs(1.0f - Mathf.Pow(k, Time.deltaTime));
     }
 }
 ```
