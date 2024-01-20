@@ -216,33 +216,50 @@ import { ViewTransitions } from 'astro:transitions';
 
 
 	.project-image-background{
+		display:flex;
+		margin: 10;
+		flex-direction: column;
+		justify-content:space-between;
 		position: relative;
 		width: 100%; height: 100%;
 		max-width: 600px;
 		background-position: 100%;
-		background: url(../images/evidence_for_o3de.jpg);
-		background-repeat: no-repeat;
-		background-position: center;
+		background-size: cover !important;
+		background-repeat: no-repeat !important;
+		background-position: center !important;
 		backface-visibility: visible;
 	}
 
-	.project-image-background::after{
-		content: "";
-		display:block;
-		width: 100%; height:100%;
-		background: var(--accent-gradient);
+	.project-image-background > *{
 		opacity: 0%;
-		position: absolute;
-		top: 0; left: 0;
-		transition: ease-in-out all 500ms  !important;
+		margin: 3vw;
+		transition: ease-in-out all;
+		transition-duration: 200ms;
 	}
 
 	.project-image-container:hover .project-image-inner{
 		transform:scale(1.1) translateY(-10px);
 	}
 
-	.project-image-container:hover .project-image-background::after{
-		opacity: 50%;
+	.project-image-inner::after {
+		content: '';
+		position: absolute;
+		left: 0; top: 0;
+		width: 100%; height: 100%;
+		background: #f9ecea;
+		opacity: 0;
+		transition: ease-in-out all;
+		transition-duration: 200ms;
+	}
+
+
+	.project-image-container:hover .project-image-background > *{
+		opacity: 100%;
+		z-index: 1000;
+	}
+
+	.project-image-container:hover .project-image-inner::after{
+		opacity : 50%;
 	}
 
 	.text-color-light{

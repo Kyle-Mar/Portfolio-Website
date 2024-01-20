@@ -1,15 +1,21 @@
 ---
 export interface Props {
 	href: string;
+    image: string;
     title: string;
     body: string;
+
 }
-const { href, title, body } = Astro.props;
+const { href, image, title, body } = Astro.props;
+
+let image_styling = "background: url(" + image + ")";
+
+
 ---
 
 <a class = "project-image-container" href = {href}>
     <div class = "project-image-inner">
-        <div class = "project-image-background">
+        <div class = "project-image-background" style = {image_styling}>
             <h1>
                 {title}
             </h1>
