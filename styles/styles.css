@@ -64,6 +64,7 @@ div.hero-name-text{
 div.hero-profession-text{
     color: var(--text-color-compliment);
     text-align:right;
+    margin: -3%;
     font-size: clamp(15px, 5vw, 75px);
     transform: translate(5vw, 0px);
 }
@@ -83,9 +84,9 @@ p.about-me-text{
 }
 
 div.headshot-hero{
-    width: 25%;
+    width: 23%;
     margin: 0px;
-    margin-top: -5%;
+    margin-top: -7%;
     transform: translate(20vw, 18vw);
 }
 
@@ -93,7 +94,6 @@ div.about-me-box{
     display:flex;
     flex-direction:column-reverse;
     width: 90%;
-    margin: 1vw;
     border-radius: 0px;
     padding: 25px
 }

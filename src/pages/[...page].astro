@@ -1,0 +1,66 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../layouts/Layout.astro";
+import DevlogEntry from "../components/DevlogEntry.astro";
+import Sidebar from "../components/Sidebar.astro";
+import {getCollection, type CollectionEntry} from "astro:content";
+
+
+export const getStaticPaths = async () => {
+	const posts = await getCollection("posts");
+	let count = posts.length;
+	let pages : any[] = [];
+
+	for(let i = 0; count > 0; count-=5){
+		pages.push({params: {page: `dev${i}`},});
+		i++;
+	}
+	return pages;
+} 
+
+
+const anim = {
+  old: {
+    name: 'test',
+	  duration: '0.2s',
+	  easing: 'cubic-bezier',
+	  fillMode: 'forwards',
+	},
+	new: {
+    name: 'test-reversed',
+	  duration: '0.3s',
+	  easing: 'cubic-bezier',
+	  fillMode: 'backwards',
+	}
+};
+  
+const myFade = {
+	forwards: anim,
+	backwards: anim,
+};
+
+
+
+const canonicalURL = new URL(Astro.url);
+
+ const posts = await getCollection("posts");
+ console.log(posts);
+
+ type Props = {
+   post_list: CollectionEntry<'posts'>[];
+ }
+
+ ---
+ 
+ <Layout title = "Devlog">
+	<Sidebar selected = "devlog"></Sidebar>
+	<div class = "main-content" transition:animate={myFade}>
+		{posts.toReversed()
+			.slice(
+				parseInt(canonicalURL.hostname.replace(/^\D+/g, '')),
+				5
+			)
+			.map((p) => <DevlogEntry post={p}/>)
+		}
+ </div>
+</Layout>
