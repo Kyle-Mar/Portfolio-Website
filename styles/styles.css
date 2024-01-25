@@ -50,23 +50,19 @@ div.hero{
     align-items: center;
     flex-direction: column;
     background-color: #f9ecea;
-    transform: translateY(-10vw);
 }
 
 div.hero-name-text{
+    font-size: calc(30px + 0.5vw);
     color: var(--text-color-dark);
     text-shadow: var(--text-color-light) 0px 5px 0;
-    font-size: clamp(20px, 10vw, 125px);
     overflow:visible;
     text-align: left;
-    transform: translate(-10vw, 0px);
 }
 div.hero-profession-text{
+    font-size: calc(25px + 0.5vw);
     color: var(--text-color-compliment);
     text-align:right;
-    margin: -3%;
-    font-size: clamp(15px, 5vw, 75px);
-    transform: translate(5vw, 0px);
 }
 
 div.main-content {
@@ -85,9 +81,6 @@ p.about-me-text{
 
 div.headshot-hero{
     width: 23%;
-    margin: 0px;
-    margin-top: -7%;
-    transform: translate(20vw, 18vw);
 }
 
 div.about-me-box{
@@ -244,8 +237,6 @@ div.about-me-box{
 }
 
 .full-headshot{
-    margin-top: 10%;
-    margin-bottom: 10%;
     max-height: 500px;
     max-width: 75%;
 }
@@ -274,7 +265,6 @@ div.about-me-box{
     }
 
     div.hero-name-text{
-        transform: translate(0px, 0px);
     }
     
     div.sidebar{
