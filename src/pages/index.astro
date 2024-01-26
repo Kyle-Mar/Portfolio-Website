@@ -43,18 +43,25 @@ const anim = {
 </head>
 <IndexLayout title="Kyle Maroscher">
 	<div class = "hero" style = "width: 100%; align-items:center;" transition:animate="fade">
-		<div class = "full-headshot headshot-hero">
-			<a href = "index.html" style = "width: 100%; height: 100%; display:block;" >
-				<img src = {"http://"+canonicalURL.host + "/images/headshot-circle.png"} style = "width: 100%; height: 100%; display:block;"/>
-			</a>
+
+		<div class = "hero-flex-container">
+
+			<div class = "full-headshot headshot-hero" style = "margin-top: 2%;">
+				<a href = "index.html" style = "width: 100%; height: 100%; display:block; " >
+					<img src = {"http://"+canonicalURL.host + "/images/HeadshotProfessional-Square.png"} style = " width: 100%;height: 100%; border-radius: 30px; transform: rotateZ(3deg); display:block; box-shadow: 6px 6px 0px var(--text-color-compliment);"/>
+				</a>
+				
+			</div>
+			<div class = "hero-text-container">
+				<h1 class = "hero-profession-text" style = " color: var(--text-color-compliment-alt); margin: 0px; margin-left: 10%;">Hey! <span>&#128075;</span> My name is</h1>
+				<div class = "hero-name-text" style = "margin-right: auto;">
+					<b>Kyle Maroscher</b>
+				</div>
+				<div class = "hero-profession-text" style = "">
+					<b><span style = "margin-left: 10%; color: var(--text-color-compliment-alt)">I am a </span>Gameplay Engineer</b>
+				</div>
+			</div>
 			
-		</div>
-		<h1 class = "hero-profession-text" style = " color: var(--text-color-compliment-alt);">Hey! <span>&#128075;</span> My name is</h1>
-		<div class = "hero-name-text">
-			<b>Kyle Maroscher</b>
-		</div>
-		<div class = "hero-profession-text">
-			<b><span style = " color: var(--text-color-compliment-alt)">I am a </span>Gameplay Engineer</b>
 		</div>
 		
 		<div class = "about-me-box">
