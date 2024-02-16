@@ -70,7 +70,7 @@ h1, div.hero-profession-text{
     display: flex; flex-direction: column; justify-content: center; width: 30%;
 }
 .hero-flex-container{
-    display:flex; justify-content:space-evenly; width: 100%; flex-direction: row-reverse; margin-top: 10%;
+    display:flex; justify-content:space-evenly; width: 100%; flex-direction: row-reverse;
 }
 
 div.main-content {
@@ -88,6 +88,7 @@ p.about-me-text{
 }
 
 div.headshot-hero{
+    transform:translateY(8%);
 }
 
 div.about-me-box{
@@ -247,6 +248,11 @@ div.about-me-box{
     max-height: 500px;
     max-width: 75%;
 }
+
+.full-headshot-hero{
+    max-height: 500px;
+    max-width: 75%;
+}
 .mobile-headshot{
     width: 0%;
     position: absolute;
@@ -254,7 +260,7 @@ div.about-me-box{
 }
 
 @media screen and (max-width: 1300px) {
-    .full-headshot{
+    .full-headshot-hero{
         min-width: 0%;
         width: 0%;
         position: absolute;
@@ -296,7 +302,6 @@ div.about-me-box{
     }
 
     .mobile-headshot{
-        margin-top: 10%;
         height: 10%;
         width: 25%;
         max-height: 0%!important;

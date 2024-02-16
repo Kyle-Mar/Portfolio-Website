@@ -46,18 +46,18 @@ const { Content } = await post.render();
   <Layout title = "Devlog">
     <Sidebar selected = "devlog"></Sidebar>
     <div class = "main-content" transition:animate={myFade}>
-      <div class="blog-container">
-        <div class="blog-header-container">
+      <div class="blog-container" style = "margin-top: 0;">
+        <div class="blog-header-container" style = "">
           <h1 class = "blog-text">{post.data.title}</h1>
-          <div style = "display:flex; flex-direction:row; width: 100%;">
-            <a href = {canonicalURL.protocol+"//"+canonicalURL.host+"/devlog/"} style = "flex: 1; text-decoration: none;">
+          <div style = "display:flex; flex-direction:row; width: 100%; ">
+            <a href = {canonicalURL.protocol+"//"+canonicalURL.host+"/dev0/"} style = "flex: 1; text-decoration: none;">
               <h2 class = "back-button">◄devlog</h2>
             </a>
             <h2 class = "blog-text" style = "flex: 1.8">{post.data.date}</h2>
 
           </div>
         </div>
-        <div class = "slug-content-container">
+        <div class = "slug-content-container" style = "padding-top: 20%">
           <Content/>
         </div>
       </div>
