@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro"
 import Sidebar from '../components/Sidebar.astro';
 import { ViewTransitions } from "astro:transitions";
 import Project from "../components/Project.astro";
+import { getCollection } from "astro:content";
 const anim = {
 	old: {
 	  name: 'test',
@@ -22,6 +23,10 @@ const anim = {
 	forwards: anim,
 	backwards: anim,
   };
+
+  const canonicalURL = new URL(Astro.url);
+  console.log(canonicalURL.protocol);
+  const projects = await getCollection("project");
 ---
 
 <Layout title = "Project Name">
@@ -30,11 +35,16 @@ const anim = {
 		<h1 class = "projects-text text-color-light">
 			My Projects
 		</h1>
-		<Project
-			href = "/a_project/"
-			image = "../images/Gnomad-Project.png"
-			title = "Gnomad"
-			body = "A whimsical metroidvania with bouncing combat being developed as a senior capstone project."
-		></Project>
+		
+		{
+			projects.map((post) => (
+				<Project
+					href = {canonicalURL.protocol+"//"+canonicalURL.host+"/project/"+post.slug}
+					image = "../images/Gnomad-Project.png"
+					title = "Gnomad"
+					body = "A whimsical metroidvania with bouncing combat being developed as a senior capstone project."
+				></Project>
+			))
+		}
     </div>
 </Layout>

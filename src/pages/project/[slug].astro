@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Sidebar from '../../components/Sidebar.astro';
+import Layout from "../../layouts/Layout.astro"
+import { ViewTransitions } from "astro:transitions";
+
+export const getStaticPaths =  async () => {
+    const projects = await getCollection('project');
+    const paths = projects.map(project => {
+      return {params:{slug: project.slug}, props: { project}}
+    })  
+    return paths;
+}
+
+
+type Props = {
+  project: CollectionEntry<"project">;
+}
+
+
+const anim = {
+	old: {
+	  name: 'test',
+	  duration: '0.2s',
+	  easing: 'linear',
+	  fillMode: 'forwards',
+	},
+	new: {
+	  name: 'test-reversed',
+	  duration: '0.3s',
+	  easing: 'linear',
+	  fillMode: 'backwards',
+	}
+  };
+  
+  const myFade = {
+	forwards: anim,
+	backwards: anim,
+  };
+
+
+const canonicalURL = new URL(Astro.url);
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+
+---
+
+<Layout title = "Project Name">
+	<Sidebar selected = "project"></Sidebar>
+	<div class = "main-content pageTransitionIn "transition:animate={myFade}>
+		<Content></Content>
+	</div>
+</Layout>

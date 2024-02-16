@@ -9,7 +9,16 @@ const postsCollection = defineCollection({
       description: z.string(),
     })
 });
+
+const projectsCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+      title: z.string(),
+      image: z.string(),
+    })
+});
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
+  projects: projectsCollection,
 };
