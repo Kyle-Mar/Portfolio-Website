@@ -57,13 +57,13 @@ div.hero-name-text{
     color: var(--text-color-dark);
     text-shadow: var(--text-color-light) 0px 5px 0;
     overflow:visible;
-    text-wrap: nowrap;
     text-align: left;
+    white-space: nowrap;
 }
 h1, div.hero-profession-text{
     font-size: calc(16px + 2vw);
     color: var(--text-color-compliment);
-    text-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .hero-text-container{

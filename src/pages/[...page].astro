@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar.astro";
 import {getCollection, type CollectionEntry} from "astro:content";
 
 
+// splits the content collection into chunks and makes new pages for those chunks.
 export const getStaticPaths = async () => {
 	const posts = await getCollection("posts");
 	let count = posts.length;
@@ -43,32 +44,40 @@ const myFade = {
 
 const canonicalURL = new URL(Astro.url);
 
-const startPoint = parseInt(canonicalURL.pathname.replace(/^[^\d]+/g, '')) * 3;
+const pageNumber = parseInt(canonicalURL.pathname.replace(/^[^\d]+/g, ''));
+const startPoint = pageNumber * 3;
 const endPoint = startPoint + 3;
 console.log(canonicalURL.pathname.replace(/^[^\d]+/g, ''));
 console.log(startPoint);
 console.log(endPoint);
 
- const posts = await getCollection("posts");
- console.log(posts);
+const posts = await getCollection("posts");
 
- type Props = {
-   post_list: CollectionEntry<'posts'>[];
- }
+// Determines whether we should display the previous page button.
+const draw_prev_button = (pageNumber > 0);
+// deterimine whether we should display the next page button
+const draw_next_button = (endPoint <= posts.length);
 
- ---
+
+
+type Props = {
+post_list: CollectionEntry<'posts'>[];
+}
+
+---
  
  <Layout title = "Devlog">
 	<Sidebar selected = "devlog"></Sidebar>
 	<div class = "main-content" transition:animate={myFade}>
 		{
-			
-			posts.toReversed()
+			posts.reverse()
 			.slice(
 				startPoint,
 				endPoint
-			)
-			.map((p) => <DevlogEntry post={p}/>)
-		}
- </div>
+				)
+				.map((p) => <DevlogEntry post={p}/>)
+			}
+		{draw_prev_button && <p>Prev page</p>}
+		{draw_next_button && <p>Next page</p>}
+	</div>
 </Layout>
