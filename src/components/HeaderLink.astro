@@ -6,11 +6,12 @@ export interface Props {
 }
 const { title, href, style} = Astro.props;
 
-
 ---
-
-<a class = "header-link"
+<nav class = "header-link">
+    <a class = "header-link"
     href = {href} 
     style = {style}>
     <b>{title}</b>
 </a>    
+</nav>
+

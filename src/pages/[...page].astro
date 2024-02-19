@@ -4,15 +4,17 @@ import Layout from "../layouts/Layout.astro";
 import DevlogEntry from "../components/DevlogEntry.astro";
 import Sidebar from "../components/Sidebar.astro";
 import {getCollection, type CollectionEntry} from "astro:content";
+import PaginationNavArrow from "../components/PaginationNavArrow.astro";
 
-
+const paginationAmount = 3;
 // splits the content collection into chunks and makes new pages for those chunks.
 export const getStaticPaths = async () => {
+	const paginationAmount = 3;
 	const posts = await getCollection("posts");
 	let count = posts.length;
 	let pages : any[] = [];
 
-	for(let i = 0; count > 0; count-=3){
+	for(let i = 0; count > 0; count-= paginationAmount) {
 		pages.push({params: {page: `dev${i}`},});
 		i++;
 	}
@@ -45,8 +47,8 @@ const myFade = {
 const canonicalURL = new URL(Astro.url);
 
 const pageNumber = parseInt(canonicalURL.pathname.replace(/^[^\d]+/g, ''));
-const startPoint = pageNumber * 3;
-const endPoint = startPoint + 3;
+const startPoint = pageNumber * paginationAmount;
+const endPoint = startPoint + paginationAmount;
 console.log(canonicalURL.pathname.replace(/^[^\d]+/g, ''));
 console.log(startPoint);
 console.log(endPoint);
@@ -56,7 +58,7 @@ const posts = await getCollection("posts");
 // Determines whether we should display the previous page button.
 const draw_prev_button = (pageNumber > 0);
 // deterimine whether we should display the next page button
-const draw_next_button = (endPoint <= posts.length);
+const draw_next_button = (endPoint < posts.length);
 
 
 
@@ -76,8 +78,12 @@ post_list: CollectionEntry<'posts'>[];
 				endPoint
 				)
 				.map((p) => <DevlogEntry post={p}/>)
-			}
-		{draw_prev_button && <p>Prev page</p>}
-		{draw_next_button && <p>Next page</p>}
+		}
+		{draw_next_button && 
+			<PaginationNavArrow page_name={`dev${pageNumber+1}`} content = "&gt"></PaginationNavArrow>
+		}
+		{draw_prev_button &&
+			<PaginationNavArrow page_name={`dev${pageNumber-1}`} content = "&lt"></PaginationNavArrow>
+		}
 	</div>
 </Layout>

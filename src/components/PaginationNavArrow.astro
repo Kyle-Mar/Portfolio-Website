@@ -1,0 +1,19 @@
+---
+export interface Props
+{
+    page_name: string;
+    content: string;
+}
+
+const canonicalUrl = new URL(Astro.url);
+const {page_name, content} = Astro.props;
+const href = canonicalUrl.origin + "/"+ page_name;
+
+---
+
+<nav>
+    <a href = {href}>
+    {content}
+    </a>
+
+</nav>

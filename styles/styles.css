@@ -60,7 +60,7 @@ div.hero-name-text{
     text-align: left;
     white-space: nowrap;
 }
-h1, div.hero-profession-text{
+h1.hero-profession-text, div.hero-profession-text{
     font-size: calc(16px + 2vw);
     color: var(--text-color-compliment);
     white-space: nowrap;
