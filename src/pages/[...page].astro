@@ -13,7 +13,6 @@ export const getStaticPaths = async () => {
 	const posts = await getCollection("posts");
 	let count = posts.length;
 	let pages : any[] = [];
-
 	for(let i = 0; count > 0; count-= paginationAmount) {
 		pages.push({params: {page: `dev${i}`},});
 		i++;
@@ -21,6 +20,21 @@ export const getStaticPaths = async () => {
 	return pages;
 } 
 
+
+function nearbyPages(pageNumber : number, collectionLength: number) : Array<number>
+{
+	const pages: Array<number> = [];
+	if(pageNumber - 1 >= 0)
+	{
+		pages.push(pageNumber - 1);
+	}
+	pages.push(pageNumber);
+	if(pageNumber < collectionLength % paginationAmount)
+	{
+		pages.push(pageNumber + 1);
+	}
+	return pages;
+}
 
 const anim = {
   old: {
@@ -61,7 +75,7 @@ const draw_prev_button = (pageNumber > 0);
 const draw_next_button = (endPoint < posts.length);
 
 
-
+//[...Array(5).keys()].map((p) => <PaginationNavArrow page_name={`dev${p}`} content = {p}></PaginationNavArrow>)
 type Props = {
 post_list: CollectionEntry<'posts'>[];
 }
@@ -79,11 +93,18 @@ post_list: CollectionEntry<'posts'>[];
 				)
 				.map((p) => <DevlogEntry post={p}/>)
 		}
-		{draw_next_button && 
-			<PaginationNavArrow page_name={`dev${pageNumber+1}`} content = "&gt"></PaginationNavArrow>
-		}
-		{draw_prev_button &&
-			<PaginationNavArrow page_name={`dev${pageNumber-1}`} content = "&lt"></PaginationNavArrow>
-		}
+		<div style = "display:flex; flex-direction: row; justify-content:space-around; width: 20%">
+			<PaginationNavArrow page_name={`dev0`} content = "&lt&lt"></PaginationNavArrow>
+			{draw_prev_button &&
+				<PaginationNavArrow page_name={`dev${pageNumber-1}`} content = "&lt"></PaginationNavArrow>
+			}
+			{
+				nearbyPages(pageNumber, posts.length).map((p) => <PaginationNavArrow page_name={`dev${p}`} content = {`${p}`}></PaginationNavArrow>)
+			}
+			{draw_next_button && 
+				<PaginationNavArrow page_name={`dev${pageNumber+1}`} content = "&gt"></PaginationNavArrow>
+			}
+			<PaginationNavArrow page_name={`dev${posts.length % paginationAmount}`} content = "&gt&gt"></PaginationNavArrow>
+		</div>
 	</div>
 </Layout>
