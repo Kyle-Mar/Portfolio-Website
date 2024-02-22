@@ -50,6 +50,38 @@ const { Content } = await project.render();
 <Layout title = "Project Name">
 	<Sidebar selected = "project"></Sidebar>
 	<div class = "main-content pageTransitionIn "transition:animate={myFade}>
+		<img src = {project.data.image} style = "border-radius: 15px; width: 70%; height: auto; margin-top: 20px;">
+		
+		<div style = "display:flex; flex-direction:column; width: 90%;font-size: 1.25rem;">
+			<div style = "display: flex; flex-direction: row; justify-content: space-around">
+				<div>
+					<div>
+						<h3 style = "margin-bottom: 0px;">Platform</h3>
+						{project.data.platform}
+					</div>
+					<div>
+						<h3 style = "margin-bottom: 0px;">Tools Used</h3>
+						{project.data.tools}
+					</div>
+					<div>
+						<h3 style = "margin-bottom: 0px;">Duration</h3>
+						{project.data.duration}
+					</div>
+					<div>
+						<h3 style = "margin-bottom: 0px;">Team Size</h3>
+						{project.data.teamSize}
+					</div>
+					<div>
+						<h3 style = "margin-bottom: 0px;">Role</h3>
+						{project.data.role}
+					</div>
+				</div>
+				<div style = "max-width: 40%; ">
+					<h3>Project Overview</h3>
+					{project.data.overview}
+				</div>
+			</div>
+		</div>
 		<Content></Content>
 	</div>
 </Layout>

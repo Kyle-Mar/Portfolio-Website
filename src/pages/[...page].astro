@@ -93,13 +93,6 @@ post_list: CollectionEntry<'posts'>[];
 				endPoint
 				)
 				.map((p) => <DevlogEntry post={p}/>)
-		}{
-			posts.reverse()
-			.slice(
-				startPoint,
-				endPoint
-				)
-				.map((p) => <DevlogEntry post={p}/>)
 		}
 		<div class = "pagination-nav-wrapper">
 			<div style = "display:flex; flex-direction: row; justify-content:space-around; width: 20%; ">
