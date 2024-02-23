@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Sidebar from '../../components/Sidebar.astro';
-import Layout from "../../layouts/Layout.astro"
+import ProjectLayout from "../../layouts/ProjectLayout.astro"
 import { ViewTransitions } from "astro:transitions";
 
 export const getStaticPaths =  async () => {
@@ -47,41 +47,45 @@ const { Content } = await project.render();
 
 ---
 
-<Layout title = "Project Name">
+<ProjectLayout title = "Project Name">
 	<Sidebar selected = "project"></Sidebar>
 	<div class = "main-content pageTransitionIn "transition:animate={myFade}>
-		<img src = {project.data.image} style = "border-radius: 15px; width: 70%; height: auto; margin-top: 20px;">
+		<img src = {project.data.image} style = "border-radius: 15px; width: 90%; height: auto; margin-top: 20px;">
 		
-		<div style = "display:flex; flex-direction:column; width: 90%;font-size: 1.25rem;">
-			<div style = "display: flex; flex-direction: row; justify-content: space-around">
+		<div style = "display:flex; flex-direction:column; width: 90%;font-size: 1.25rem; align-self: center;">
+			<div style = "display: flex; flex-direction: row; justify-content: space-between">
 				<div>
 					<div>
-						<h3 style = "margin-bottom: 0px;">Platform</h3>
-						{project.data.platform}
+						<h3>Platform</h3>
+						<p>{project.data.platform}</p>
 					</div>
 					<div>
-						<h3 style = "margin-bottom: 0px;">Tools Used</h3>
-						{project.data.tools}
+						<h3>Tools Used</h3>
+						<p>{project.data.tools}</p>
 					</div>
 					<div>
-						<h3 style = "margin-bottom: 0px;">Duration</h3>
-						{project.data.duration}
+						<h3>Duration</h3>
+						<p>{project.data.duration}</p>
 					</div>
 					<div>
-						<h3 style = "margin-bottom: 0px;">Team Size</h3>
-						{project.data.teamSize}
+						<h3>Team Size</h3>
+						<p>{project.data.teamSize}</p>
 					</div>
 					<div>
-						<h3 style = "margin-bottom: 0px;">Role</h3>
-						{project.data.role}
+						<h3>Role</h3>
+						<p>{project.data.role}</p>
 					</div>
 				</div>
 				<div style = "max-width: 40%; ">
 					<h3>Project Overview</h3>
-					{project.data.overview}
+					<p>{project.data.overview}</p>
 				</div>
 			</div>
+			<div style = "display: flex; flex-direction: column; margin-top: 0px;">
+				<h3 style = "">My Role</h3>
+				<Content></Content>			
+			</div>
 		</div>
-		<Content></Content>
+		
 	</div>
 </Layout>

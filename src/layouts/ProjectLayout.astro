@@ -1,0 +1,30 @@
+---
+import Layout from "./Layout.astro"
+import '../../styles/styles.css'
+---
+<Layout title = "Project">
+    <slot/>
+</Layout>
+
+<style is:global>
+    h3 
+    { 
+        color: var(--text-color-compliment);
+        margin-bottom: 0px;
+    }
+    h4
+    {
+        margin-bottom: 0px;
+        color: var(--text-color-compliment);
+    }
+    p
+    {
+        margin-top: 0px; 
+        color: var(--text-color-dark);
+    }
+    ul
+    {
+        margin-top: 0px;
+        color: var(--text-color-dark);
+    }
+</style>
